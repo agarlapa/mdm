@@ -12,7 +12,6 @@ import javax.ws.rs.core.HttpHeaders;
 import com.glycus.mdm.entity.Currency;
 import com.glycus.mdm.sessionbeans.CurrencyFacade;
 import java.util.List;
-import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -25,7 +24,6 @@ import javax.ws.rs.core.Response;
  *
  */
 @Path("currency")
-@Stateless
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class CurrencyResource {
