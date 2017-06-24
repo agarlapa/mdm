@@ -1,11 +1,12 @@
-/**
- *
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package com.glycus.mdm.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,16 +14,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author agarlapa
  *
+ * @author agarlapa
  */
 @Entity
-@Table(name = "currency", schema = "mdm")
+@Table(name = "country", schema = "mdm")
 @XmlRootElement
-public class Currency implements Serializable {
+public class Country implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,10 +34,15 @@ public class Currency implements Serializable {
     private Long id;
 
     @Column(name = "C_NAME", nullable = false, unique = true)
+    @Size(min = 1, max = 50)
     private String name;
 
     @Column(name = "C_CODE", nullable = false, unique = true)
+    @Size(min = 1, max = 4)
     private String code;
+
+    @Column(name = "C_PHONE_CODE", nullable = false)
+    private int phoneCode;
 
     @Column(name = "C_STATUS", nullable = false)
     private String status;
@@ -50,7 +57,7 @@ public class Currency implements Serializable {
     @Column(name = "C_VERSION", nullable = false)
     private Long version;
 
-    public Currency() {
+    public Country() {
     }
 
     public Long getId() {
@@ -75,6 +82,14 @@ public class Currency implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public int getPhoneCode() {
+        return phoneCode;
+    }
+
+    public void setPhoneCode(int phoneCode) {
+        this.phoneCode = phoneCode;
     }
 
     public String getStatus() {

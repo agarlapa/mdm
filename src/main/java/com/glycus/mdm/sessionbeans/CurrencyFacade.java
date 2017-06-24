@@ -6,9 +6,11 @@
 package com.glycus.mdm.sessionbeans;
 
 import com.glycus.mdm.entity.Currency;
+import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +30,32 @@ public class CurrencyFacade extends AbstractFacade<Currency> {
     public CurrencyFacade() {
         super(Currency.class);
     }
+
+    @Override
+    public void create(Currency currency) {
+        currency.setName(currency.getName());
+        currency.setCode(currency.getCode());
+        currency.setStatus("A");
+        currency.setCreatedDateTime(new Date());
+        getEntityManager().persist(currency);
+    }
+
+    @Override
+    public void edit(Currency entity) {
+        Currency currency = getEntityManager().find(Currency.class, entity.getId());
+        currency.setId(entity.getId());
+        currency.setName(entity.getName());
+        currency.setCode(entity.getCode());
+        currency.setStatus(entity.getStatus());
+        currency.setCreatedDateTime(entity.getCreatedDateTime());
+        currency.setModifiedDateTime(new Date());
+        getEntityManager().merge(currency);
+    }
     
+    public Currency findByCode(String code) {
+        Query query = getEntityManager().createQuery("select currency from Currency currency where currency.code = :code");
+        query.setParameter("code", code);
+        Currency currency = (Currency) query.getSingleResult();
+        return currency;
+    }
 }
