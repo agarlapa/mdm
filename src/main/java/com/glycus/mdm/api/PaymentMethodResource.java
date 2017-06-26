@@ -5,8 +5,8 @@
  */
 package com.glycus.mdm.api;
 
-import com.glycus.mdm.entity.PaymentTerm;
-import com.glycus.mdm.sessionbeans.PaymentTermFacade;
+import com.glycus.mdm.entity.PaymentMethod;
+import com.glycus.mdm.sessionbeans.PaymentMethodFacade;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -28,35 +28,34 @@ import javax.ws.rs.core.Response;
 @Stateless
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@Path("paymentTerm")
-public class PaymentTermResource {
-
+@Path("paymentMethod")
+public class PaymentMethodResource {
     @Inject
-    private PaymentTermFacade dao;
+    private PaymentMethodFacade dao;
 
     @GET
-    public List<PaymentTerm> findAll() {
-        List<PaymentTerm> paymentTermList = dao.findAll();
-        return paymentTermList;
+    public List<PaymentMethod> findAll() {
+        List<PaymentMethod> paymentMethodList = dao.findAll();
+        return paymentMethodList;
     }
 
     @GET
     @Path("findByCode")
-    public PaymentTerm findByCode(@Context HttpHeaders headers) {
+    public PaymentMethod findByCode(@Context HttpHeaders headers) {
         String code = headers.getRequestHeader("code").get(0);
-        PaymentTerm paymentTerm = dao.findByCode(code);
-        return paymentTerm;
+        PaymentMethod paymentMethod = dao.findByCode(code);
+        return paymentMethod;
     }
 
     @POST
-    public Response add(PaymentTerm paymentTerm) {
-        dao.create(paymentTerm);
+    public Response add(PaymentMethod paymentMethod) {
+        dao.create(paymentMethod);
         return Response.ok().build();
     }
 
     @PUT
-    public Response update(PaymentTerm paymentTerm) {
-        dao.edit(paymentTerm);
+    public Response update(PaymentMethod paymentMethod) {
+        dao.edit(paymentMethod);
         return Response.ok().build();
     }
 
