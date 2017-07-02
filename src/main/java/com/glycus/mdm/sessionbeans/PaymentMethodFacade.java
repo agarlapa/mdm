@@ -47,7 +47,7 @@ public class PaymentMethodFacade extends AbstractFacade<PaymentMethod> {
         paymentMethod.setId(entity.getId());
         paymentMethod.setName(entity.getName());
         paymentMethod.setCode(entity.getCode());
-        paymentMethod.setAdditionalInfo(paymentMethod.getAdditionalInfo());
+        paymentMethod.setAdditionalInfo(entity.getAdditionalInfo());
         paymentMethod.setStatus(entity.getStatus());
         paymentMethod.setCreatedDateTime(entity.getCreatedDateTime());
         paymentMethod.setModifiedDateTime(new Date());

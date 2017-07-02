@@ -47,7 +47,7 @@ public class PaymentTermFacade extends AbstractFacade<PaymentTerm> {
         paymentTerm.setId(entity.getId());
         paymentTerm.setName(entity.getName());
         paymentTerm.setCode(entity.getCode());
-        paymentTerm.setAdditionalInfo(paymentTerm.getAdditionalInfo());
+        paymentTerm.setAdditionalInfo(entity.getAdditionalInfo());
         paymentTerm.setStatus(entity.getStatus());
         paymentTerm.setCreatedDateTime(entity.getCreatedDateTime());
         paymentTerm.setModifiedDateTime(new Date());

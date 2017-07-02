@@ -47,7 +47,7 @@ public class UOMFacade extends AbstractFacade<UOM> {
         uom.setId(entity.getId());
         uom.setName(entity.getName());
         uom.setCode(entity.getCode());
-        uom.setAdditionalInfo(uom.getAdditionalInfo());
+        uom.setAdditionalInfo(entity.getAdditionalInfo());
         uom.setStatus(entity.getStatus());
         uom.setCreatedDateTime(entity.getCreatedDateTime());
         uom.setModifiedDateTime(new Date());
