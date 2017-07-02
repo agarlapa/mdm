@@ -20,9 +20,9 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author agarlapa
  */
 @Entity
-@Table(name = "paymentmethod", schema = "mdm")
+@Table(name = "uom", schema = "mdm")
 @XmlRootElement
-public class PaymentMethod {
+public class UOM {
 
     private static final long serialVersionUID = 1L;
 
@@ -53,7 +53,7 @@ public class PaymentMethod {
     @Column(name = "C_VERSION", nullable = false)
     private Long version;
 
-    public PaymentMethod() {
+    public UOM() {
     }
 
     public Long getId() {
