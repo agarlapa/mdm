@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.glycus.mdm.sessionbeans;
+package com.glycus.mdm.dao;
 
-import com.glycus.mdm.entity.Gender;
+import com.glycus.mdm.model.Gender;
 import java.util.Date;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -16,8 +15,7 @@ import javax.persistence.Query;
  *
  * @author agarlapa
  */
-@Stateless
-public class GenderFacade extends AbstractFacade<Gender> {
+public class GenderDao extends AbstractFacade<Gender> {
 
     @PersistenceContext(unitName = "MDM")
     private EntityManager em;
@@ -27,7 +25,7 @@ public class GenderFacade extends AbstractFacade<Gender> {
         return em;
     }
 
-    public GenderFacade() {
+    public GenderDao() {
         super(Gender.class);
     }
     

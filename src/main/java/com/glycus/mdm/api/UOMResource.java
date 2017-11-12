@@ -5,59 +5,50 @@
  */
 package com.glycus.mdm.api;
 
-import com.glycus.mdm.entity.UOM;
-import com.glycus.mdm.sessionbeans.UOMFacade;
+import com.glycus.mdm.model.UOM;
+import com.glycus.mdm.dao.UOMDao;
 import java.util.List;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
+
 
 /**
  *
  * @author agarlapa
  */
-@Stateless
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
-@Path("uom")
+@RestController
 public class UOMResource {
-     @Inject
-    private UOMFacade dao;
+     @Autowired
+    private UOMDao dao;
 
-    @GET
+    @GetMapping("/uom")
     public List<UOM> findAll() {
         List<UOM> uomList = dao.findAll();
         return uomList;
     }
 
-    @GET
-    @Path("findByCode")
-    public UOM findByCode(@Context HttpHeaders headers) {
-        String code = headers.getRequestHeader("code").get(0);
+    @GetMapping("/uom/findByCode")
+    public UOM findByCode(@RequestHeader HttpHeaders headers) {
+        String code = headers.get("code").get(0);
         UOM uom = dao.findByCode(code);
         return uom;
     }
 
-    @POST
-    public Response add(UOM uom) {
+    @PostMapping("/uom")
+    public ResponseEntity add(UOM uom) {
         dao.create(uom);
-        return Response.ok().build();
+        return ResponseEntity.ok().build();
     }
 
-    @PUT
-    public Response update(UOM uom) {
+    @PutMapping("/uom")
+    public ResponseEntity update(UOM uom) {
         dao.edit(uom);
-        return Response.ok().build();
+        return ResponseEntity.ok().build();
     }
-
-    
 }

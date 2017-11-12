@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.glycus.mdm.entity;
+package com.glycus.mdm.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,9 +21,9 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author agarlapa
  */
 @Entity
-@Table(name = "user", schema = "mdm")
+@Table(name = "country", schema = "mdm")
 @XmlRootElement
-public class User {
+public class Country implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,23 +32,14 @@ public class User {
     @Column(name = "C_ID", nullable = false)
     private Long id;
 
-    @Column(name = "C_NAME", nullable = false)
+    @Column(name = "C_NAME", nullable = false, unique = true)
     private String name;
 
-    @Column(name = "C_CODE", nullable = false)
+    @Column(name = "C_CODE", nullable = false, unique = true)
     private String code;
 
-    @Column(name = "C_EMAIL_ID", nullable = false)
-    private String emailId;
-
-    @Column(name = "C_PASSWORD", nullable = false)
-    private String password;
-
-    @Column(name = "C_IS_BUYER", nullable = false)
-    private String isBuyer;
-
-    @Column(name = "C_ADDITIONAL_INFO", nullable = true)
-    private String additionalInfo;
+    @Column(name = "C_PHONE_CODE", nullable = false)
+    private int phoneCode;
 
     @Column(name = "C_STATUS", nullable = false)
     private String status;
@@ -62,7 +54,7 @@ public class User {
     @Column(name = "C_VERSION", nullable = false)
     private Long version;
 
-    public User() {
+    public Country() {
     }
 
     public Long getId() {
@@ -89,36 +81,12 @@ public class User {
         this.code = code;
     }
 
-    public String getEmailId() {
-        return emailId;
+    public int getPhoneCode() {
+        return phoneCode;
     }
 
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getIsBuyer() {
-        return isBuyer;
-    }
-
-    public void setIsBuyer(String isBuyer) {
-        this.isBuyer = isBuyer;
-    }
-
-    public String getAdditionalInfo() {
-        return additionalInfo;
-    }
-
-    public void setAdditionalInfo(String additionalInfo) {
-        this.additionalInfo = additionalInfo;
+    public void setPhoneCode(int phoneCode) {
+        this.phoneCode = phoneCode;
     }
 
     public String getStatus() {

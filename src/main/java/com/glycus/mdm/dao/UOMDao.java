@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.glycus.mdm.sessionbeans;
+package com.glycus.mdm.dao;
 
-import com.glycus.mdm.entity.UOM;
+import com.glycus.mdm.model.UOM;
 import java.util.Date;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -16,8 +15,7 @@ import javax.persistence.Query;
  *
  * @author agarlapa
  */
-@Stateless
-public class UOMFacade extends AbstractFacade<UOM> {
+public class UOMDao extends AbstractFacade<UOM> {
 
     @PersistenceContext(unitName = "MDM")
     private EntityManager em;
@@ -27,7 +25,7 @@ public class UOMFacade extends AbstractFacade<UOM> {
         return em;
     }
 
-    public UOMFacade() {
+    public UOMDao() {
         super(UOM.class);
     }
 

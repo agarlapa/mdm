@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.glycus.mdm.entity;
+package com.glycus.mdm.model;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,7 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -33,7 +32,6 @@ public class Gender implements Serializable {
     private Long id;
 
     @Column(name = "C_NAME", nullable = false, unique = true)
-    @Size(min = 1, max = 50)
     private String name;
     
     @Column(name = "C_STATUS", nullable = false)

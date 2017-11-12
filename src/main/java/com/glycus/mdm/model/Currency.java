@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.glycus.mdm.entity;
+package com.glycus.mdm.model;
 
 import java.io.Serializable;
 import java.util.Date;

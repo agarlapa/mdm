@@ -5,59 +5,51 @@
  */
 package com.glycus.mdm.api;
 
-import com.glycus.mdm.entity.Country;
-import com.glycus.mdm.sessionbeans.CountryFacade;
+import com.glycus.mdm.model.Country;
+import com.glycus.mdm.dao.CountryDao;
 import java.util.List;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
+
 
 /**
  *
  * @author agarlapa
  */
-@Stateless
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
-@Path("country")
+@RestController
 public class CountryResource {
 
-    @Inject
-    private CountryFacade dao;
+    @Autowired
+    private CountryDao dao;
 
-    @GET
+    @GetMapping("/country")
     public List<Country> findAll() {
         List<Country> countryList = dao.findAll();
         return countryList;
     }
 
-    @GET
-    @Path("findByCode")
-    public Country findByCode(@Context HttpHeaders headers) {
-        String code = headers.getRequestHeader("code").get(0);
+    @GetMapping("/country/findByCode")
+    public Country findByCode(@RequestHeader HttpHeaders headers) {
+        String code = headers.get("code").get(0);
         Country country = dao.findByCode(code);
         return country;
     }
 
-    @POST
-    public Response add(Country country) {
+    @PostMapping("/country")
+    public ResponseEntity add(Country country) {
         dao.create(country);
-        return Response.ok().build();
+        return ResponseEntity.ok().build();
     }
 
-    @PUT
-    public Response update(Country country) {
+    @PutMapping("/country")
+    public ResponseEntity update(Country country) {
         dao.edit(country);
-        return Response.ok().build();
+        return ResponseEntity.ok().build();
     }
-
 }

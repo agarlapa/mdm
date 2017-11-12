@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.glycus.mdm.entity;
+package com.glycus.mdm.model;
 
-import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,11 +20,10 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author agarlapa
  */
 @Entity
-@Table(name = "paymentterm", schema = "mdm")
+@Table(name = "uom", schema = "mdm")
 @XmlRootElement
+public class UOM {
 
-public class PaymentTerm implements Serializable {
-    
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -41,7 +39,7 @@ public class PaymentTerm implements Serializable {
 
     @Column(name = "C_ADDITIONAL_INFO", nullable = true)
     private String additionalInfo;
-            
+
     @Column(name = "C_STATUS", nullable = false)
     private String status;
 
@@ -55,7 +53,7 @@ public class PaymentTerm implements Serializable {
     @Column(name = "C_VERSION", nullable = false)
     private Long version;
 
-    public PaymentTerm() {
+    public UOM() {
     }
 
     public Long getId() {

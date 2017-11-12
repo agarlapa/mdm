@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.glycus.mdm.sessionbeans;
+package com.glycus.mdm.dao;
 
-import com.glycus.mdm.entity.PaymentMethod;
+import com.glycus.mdm.model.PaymentMethod;
 import java.util.Date;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -16,8 +15,7 @@ import javax.persistence.Query;
  *
  * @author agarlapa
  */
-@Stateless
-public class PaymentMethodFacade extends AbstractFacade<PaymentMethod> {
+public class PaymentMethodDao extends AbstractFacade<PaymentMethod> {
 
     @PersistenceContext(unitName = "MDM")
     private EntityManager em;
@@ -27,7 +25,7 @@ public class PaymentMethodFacade extends AbstractFacade<PaymentMethod> {
         return em;
     }
 
-    public PaymentMethodFacade() {
+    public PaymentMethodDao() {
         super(PaymentMethod.class);
     }
     

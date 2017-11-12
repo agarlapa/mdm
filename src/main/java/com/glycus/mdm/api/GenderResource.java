@@ -5,59 +5,52 @@
  */
 package com.glycus.mdm.api;
 
-import com.glycus.mdm.entity.Gender;
-import com.glycus.mdm.sessionbeans.GenderFacade;
+import com.glycus.mdm.model.Gender;
+import com.glycus.mdm.dao.GenderDao;
 import java.util.List;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
+
 
 /**
  *
  * @author agarlapa
  */
-@Stateless
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
-@Path("gender")
 
+@RestController
 public class GenderResource {
     
-    @Inject
-    private GenderFacade dao;
+    @Autowired
+    private GenderDao dao;
 
-    @GET
+    @GetMapping("/gender")
     public List<Gender> findAll() {
         List<Gender> listOfGenders = dao.findAll();
         return listOfGenders;
     }
 
-    @GET
-    @Path("findByName")
-    public Gender findByCode(@Context HttpHeaders headers) {
-        String name = headers.getRequestHeader("name").get(0);
+    @GetMapping("/gender/findByName")
+    public Gender findByCode(@RequestHeader HttpHeaders headers) {
+        String name = headers.get("name").get(0);
         Gender gender = dao.findByName(name);
         return gender;
     }
 
-    @POST
-    public Response add(Gender gender) {
+    @PostMapping("/gender")
+    public ResponseEntity add(Gender gender) {
         dao.create(gender);
-        return Response.ok().build();
+        return ResponseEntity.ok().build();
     }
 
-    @PUT
-    public Response update(Gender gender) {
+    @PutMapping("/gender")
+    public ResponseEntity update(Gender gender) {
         dao.edit(gender);
-        return Response.ok().build();
+        return ResponseEntity.ok().build();
     }
 }

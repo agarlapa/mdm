@@ -5,58 +5,51 @@
  */
 package com.glycus.mdm.api;
 
-import com.glycus.mdm.entity.PaymentMethod;
-import com.glycus.mdm.sessionbeans.PaymentMethodFacade;
+import com.glycus.mdm.model.PaymentMethod;
+import com.glycus.mdm.dao.PaymentMethodDao;
 import java.util.List;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
+
 
 /**
  *
  * @author agarlapa
  */
-@Stateless
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
-@Path("paymentMethod")
+@RestController
 public class PaymentMethodResource {
-    @Inject
-    private PaymentMethodFacade dao;
+    @Autowired
+    private PaymentMethodDao dao;
 
-    @GET
+    @GetMapping("/paymentmethod")
     public List<PaymentMethod> findAll() {
         List<PaymentMethod> paymentMethodList = dao.findAll();
         return paymentMethodList;
     }
 
-    @GET
-    @Path("findByCode")
-    public PaymentMethod findByCode(@Context HttpHeaders headers) {
-        String code = headers.getRequestHeader("code").get(0);
+    @GetMapping("/paymentmethod/findByCode")
+    public PaymentMethod findByCode(@RequestHeader HttpHeaders headers) {
+        String code = headers.get("code").get(0);
         PaymentMethod paymentMethod = dao.findByCode(code);
         return paymentMethod;
     }
 
-    @POST
-    public Response add(PaymentMethod paymentMethod) {
+    @PostMapping("/paymentmethod")
+    public ResponseEntity add(PaymentMethod paymentMethod) {
         dao.create(paymentMethod);
-        return Response.ok().build();
+        return ResponseEntity.ok().build();
     }
 
-    @PUT
-    public Response update(PaymentMethod paymentMethod) {
+    @PutMapping("/paymentmethod")
+    public ResponseEntity update(PaymentMethod paymentMethod) {
         dao.edit(paymentMethod);
-        return Response.ok().build();
+        return ResponseEntity.ok().build();
     }
 
 }

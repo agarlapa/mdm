@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.glycus.mdm.entity;
+package com.glycus.mdm.model;
 
-import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -22,9 +20,9 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author agarlapa
  */
 @Entity
-@Table(name = "country", schema = "mdm")
+@Table(name = "user", schema = "mdm")
 @XmlRootElement
-public class Country implements Serializable {
+public class User {
 
     private static final long serialVersionUID = 1L;
 
@@ -33,16 +31,23 @@ public class Country implements Serializable {
     @Column(name = "C_ID", nullable = false)
     private Long id;
 
-    @Column(name = "C_NAME", nullable = false, unique = true)
-    @Size(min = 1, max = 50)
+    @Column(name = "C_NAME", nullable = false)
     private String name;
 
-    @Column(name = "C_CODE", nullable = false, unique = true)
-    @Size(min = 1, max = 4)
+    @Column(name = "C_CODE", nullable = false)
     private String code;
 
-    @Column(name = "C_PHONE_CODE", nullable = false)
-    private int phoneCode;
+    @Column(name = "C_EMAIL_ID", nullable = false)
+    private String emailId;
+
+    @Column(name = "C_PASSWORD", nullable = false)
+    private String password;
+
+    @Column(name = "C_IS_BUYER", nullable = false)
+    private String isBuyer;
+
+    @Column(name = "C_ADDITIONAL_INFO", nullable = true)
+    private String additionalInfo;
 
     @Column(name = "C_STATUS", nullable = false)
     private String status;
@@ -57,7 +62,7 @@ public class Country implements Serializable {
     @Column(name = "C_VERSION", nullable = false)
     private Long version;
 
-    public Country() {
+    public User() {
     }
 
     public Long getId() {
@@ -84,12 +89,36 @@ public class Country implements Serializable {
         this.code = code;
     }
 
-    public int getPhoneCode() {
-        return phoneCode;
+    public String getEmailId() {
+        return emailId;
     }
 
-    public void setPhoneCode(int phoneCode) {
-        this.phoneCode = phoneCode;
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getIsBuyer() {
+        return isBuyer;
+    }
+
+    public void setIsBuyer(String isBuyer) {
+        this.isBuyer = isBuyer;
+    }
+
+    public String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 
     public String getStatus() {
